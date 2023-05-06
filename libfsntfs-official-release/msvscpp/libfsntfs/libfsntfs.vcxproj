@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="VSDebug|Win32">
+      <Configuration>VSDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D1CA56F0-00C0-4E8C-BD6F-8A15619A954D}</ProjectGuid>
+    <RootNamespace>libfsntfs</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VSDebug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='VSDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>16.0.33423.256</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VSDebug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\include;..\..\common;..\..\libcerror;..\..\libcthreads;..\..\libcdata;..\..\libclocale;..\..\libcnotify;..\..\libcsplit;..\..\libuna;..\..\libcfile;..\..\libcpath;..\..\libbfio;..\..\libfcache;..\..\libfdata;..\..\libfdatetime;..\..\libfguid;..\..\libfwnt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;HAVE_LOCAL_LIBCERROR;HAVE_LOCAL_LIBCTHREADS;HAVE_LOCAL_LIBCDATA;HAVE_LOCAL_LIBCLOCALE;HAVE_LOCAL_LIBCNOTIFY;HAVE_LOCAL_LIBCSPLIT;HAVE_LOCAL_LIBUNA;HAVE_LOCAL_LIBCFILE;HAVE_LOCAL_LIBCPATH;HAVE_LOCAL_LIBBFIO;HAVE_LOCAL_LIBFCACHE;HAVE_LOCAL_LIBFDATA;HAVE_LOCAL_LIBFDATETIME;HAVE_LOCAL_LIBFGUID;HAVE_LOCAL_LIBFWNT;LIBFSNTFS_DLL_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>$(OutDir)$(ProjectName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='VSDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\include;..\..\common;..\..\libcerror;..\..\libcthreads;..\..\libcdata;..\..\libclocale;..\..\libcnotify;..\..\libcsplit;..\..\libuna;..\..\libcfile;..\..\libcpath;..\..\libbfio;..\..\libfcache;..\..\libfdata;..\..\libfdatetime;..\..\libfguid;..\..\libfwnt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;HAVE_LOCAL_LIBCERROR;HAVE_LOCAL_LIBCTHREADS;HAVE_LOCAL_LIBCDATA;HAVE_LOCAL_LIBCLOCALE;HAVE_LOCAL_LIBCNOTIFY;HAVE_LOCAL_LIBCSPLIT;HAVE_LOCAL_LIBUNA;HAVE_LOCAL_LIBCFILE;HAVE_LOCAL_LIBCPATH;HAVE_LOCAL_LIBBFIO;HAVE_LOCAL_LIBFCACHE;HAVE_LOCAL_LIBFDATA;HAVE_LOCAL_LIBFDATETIME;HAVE_LOCAL_LIBFGUID;HAVE_LOCAL_LIBFWNT;LIBFSNTFS_DLL_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <SmallerTypeCheck>true</SmallerTypeCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>$(OutDir)$(ProjectName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\libfsntfs\libfsntfs.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_attribute_list_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_attribute_list_entry.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_bitmap_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_buffer_data_handle.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_cluster_block.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_cluster_block_data.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_cluster_block_stream.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_cluster_block_vector.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_compressed_block.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_compressed_block_data_handle.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_compressed_block_vector.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_compressed_data_handle.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_compression.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_compression_unit_data_handle.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_compression_unit_descriptor.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_data_run.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_data_stream.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_debug.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_directory_entries_tree.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_directory_entry.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_error.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_extent.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_file_entry.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_file_name_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_file_name_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_file_system.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_fixup_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_index.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_index_entry.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_index_entry_header.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_index_entry_vector.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_index_node.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_index_node_header.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_index_root_header.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_index_value.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_io_handle.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_logged_utility_stream_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_mft.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_mft_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_mft_attribute_list.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_mft_attribute_list_entry.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_mft_entry.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_mft_entry_header.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_mft_metadata_file.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_name.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_notify.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_object_identifier_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_object_identifier_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_path_hint.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_profiler.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_reparse_point_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_reparse_point_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_sds_index_value.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_security_descriptor_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_security_descriptor_index.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_security_descriptor_index_value.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_security_descriptor_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_standard_information_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_standard_information_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_support.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_txf_data_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_usn_change_journal.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_volume.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_volume_header.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_volume_information_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_volume_information_values.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_volume_name_attribute.c" />
+    <ClCompile Include="..\..\libfsntfs\libfsntfs_volume_name_values.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\libfsntfs\fsntfs_file_name.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_index.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_logged_utility_stream.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_mft_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_mft_attribute_list.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_mft_entry.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_object_identifier.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_reparse_point.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_secure.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_standard_information.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_txf_data.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_volume_header.h" />
+    <ClInclude Include="..\..\libfsntfs\fsntfs_volume_information.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_attribute_list_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_attribute_list_entry.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_bitmap_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_buffer_data_handle.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_cluster_block.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_cluster_block_data.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_cluster_block_stream.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_cluster_block_vector.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_compressed_block.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_compressed_block_data_handle.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_compressed_block_vector.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_compressed_data_handle.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_compression.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_compression_unit_data_handle.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_compression_unit_descriptor.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_data_run.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_data_stream.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_debug.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_definitions.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_directory_entries_tree.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_directory_entry.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_error.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_extent.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_extern.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_file_entry.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_file_name_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_file_name_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_file_system.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_fixup_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_index.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_index_entry.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_index_entry_header.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_index_entry_vector.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_index_node.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_index_node_header.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_index_root_header.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_index_value.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_io_handle.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libbfio.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libcdata.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libcerror.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libclocale.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libcnotify.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libcthreads.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libfcache.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libfdata.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libfdatetime.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libfguid.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libfwnt.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_libuna.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_logged_utility_stream_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_mft.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_mft_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_mft_attribute_list.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_mft_attribute_list_entry.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_mft_entry.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_mft_entry_header.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_mft_metadata_file.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_name.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_notify.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_object_identifier_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_object_identifier_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_path_hint.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_profiler.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_reparse_point_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_reparse_point_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_sds_index_value.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_security_descriptor_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_security_descriptor_index.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_security_descriptor_index_value.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_security_descriptor_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_standard_information_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_standard_information_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_support.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_txf_data_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_types.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_unused.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_usn_change_journal.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_volume.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_volume_header.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_volume_information_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_volume_information_values.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_volume_name_attribute.h" />
+    <ClInclude Include="..\..\libfsntfs\libfsntfs_volume_name_values.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\libfsntfs\libfsntfs.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\libbfio\libbfio.vcxproj">
+      <Project>{b3caa0da-b778-4b69-8537-3af7f9984f51}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcdata\libcdata.vcxproj">
+      <Project>{f42c141b-becb-4f9c-828b-8ba0db2bf7e5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcerror\libcerror.vcxproj">
+      <Project>{4c79d798-fb54-4cd5-9067-9bdc8678478a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcfile\libcfile.vcxproj">
+      <Project>{9dede9e5-79d9-41bf-b0e7-92f61d394be2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libclocale\libclocale.vcxproj">
+      <Project>{f0dfa3bb-b24d-4b3c-b3c2-9fb961d96395}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcnotify\libcnotify.vcxproj">
+      <Project>{5641b37b-7ae7-450a-a433-7b83c73bc878}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcpath\libcpath.vcxproj">
+      <Project>{5c1834b6-0ba9-4541-8770-d65a78f33958}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcsplit\libcsplit.vcxproj">
+      <Project>{9d9a7fb3-b049-4e4c-835a-d2516dc2f076}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcthreads\libcthreads.vcxproj">
+      <Project>{1ef7b932-7b1d-49da-8d58-e9cf0101c1f7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libfcache\libfcache.vcxproj">
+      <Project>{d46d1213-a541-465a-b75b-b5be4df98cdb}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libfdata\libfdata.vcxproj">
+      <Project>{d9725aed-6124-4225-ac2b-306a97f90607}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libfdatetime\libfdatetime.vcxproj">
+      <Project>{a95c47c2-8cfa-4bbb-bd66-3b198323b409}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libfguid\libfguid.vcxproj">
+      <Project>{ad1e9bc6-39ca-4913-8c16-15ad16f1ba78}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libfwnt\libfwnt.vcxproj">
+      <Project>{1860a9f0-4e82-4808-b6f0-59625d118021}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libuna\libuna.vcxproj">
+      <Project>{8447ca5b-9d12-4df0-b225-a25f4b288d2d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

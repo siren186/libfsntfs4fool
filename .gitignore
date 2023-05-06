@@ -1,0 +1,7 @@
+/libfsntfs-official-release/msvscpp/.vs
+/libfsntfs-official-release/msvscpp/Release
+/libfsntfs-official-release/msvscpp/VSDebug
+*.user
+/libfsntfs-official-release/msvscpp/fsntfs_test_data_stream/VSDebug
+VSDebug
+Release

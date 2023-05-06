@@ -42,6 +42,7 @@
 #include "../libfsntfs/libfsntfs_mft_attribute.h"
 #include "../libfsntfs/libfsntfs_mft_entry.h"
 #include "../libfsntfs/libfsntfs_mft_entry_header.h"
+#include "libfsntfs_simple.h"
 
 /* Define to make fsntfs_test_file generate verbose output
 #define FSNTFS_TEST_MFT_ENTRY_VERBOSE
@@ -2426,6 +2427,13 @@ on_error:
 
 #endif /* defined( __GNUC__ ) && !defined( LIBFSNTFS_DLL_IMPORT ) */
 
+void read_mft_buffer(void* buffer)
+{
+    FILE* fp = fopen("H:\\3.MFT", "rb");
+    fread(buffer, 1024, 1, fp);
+    fclose(fp);
+}
+
 /* The main program
  */
 #if defined( HAVE_WIDE_SYSTEM_CHARACTER )
@@ -2438,6 +2446,20 @@ int main(
      char * const argv[] FSNTFS_TEST_ATTRIBUTE_UNUSED )
 #endif
 {
+    // Load MFT-Entry
+    char* mft_buffer = (char*)malloc(1024);
+    read_mft_buffer(mft_buffer);
+    simple_file_info_of_mft_t simple_file_info;
+    int ret = libfsntfs_simple_parse_mft_entry(&simple_file_info, mft_buffer, 1024);
+	ret = 10;
+
+
+
+
+
+
+
+
 #if defined( __GNUC__ ) && !defined( LIBFSNTFS_DLL_IMPORT )
 
 	uint8_t mft_entry_data[ 1024 ];

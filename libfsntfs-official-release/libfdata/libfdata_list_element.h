@@ -1,7 +1,7 @@
 /*
  * The list element functions
  *
- * Copyright (C) 2010-2023, Joachim Metz <joachim.metz@gmail.com>
+ * Copyright (C) 2010-2022, Joachim Metz <joachim.metz@gmail.com>
  *
  * Refer to AUTHORS for acknowledgements.
  *
@@ -79,7 +79,6 @@ int libfdata_list_element_clone(
      libfdata_list_element_t *source_element,
      libcerror_error_t **error );
 
-LIBFDATA_EXTERN \
 int libfdata_list_element_get_element_index(
      libfdata_list_element_t *element,
      int *element_index,

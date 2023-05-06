@@ -40,6 +40,156 @@
 #include "libfsntfs_types.h"
 #include "libfsntfs_volume_information_attribute.h"
 #include "libfsntfs_volume_name_attribute.h"
+#include "libfsntfs.h"
+#include "libfsntfs_simple.h"
+
+// 文件名、文件大小、创建时间、修改时间、访问时间、文件块列表
+int libfsntfs_simple_parse_mft_entry(
+	simple_file_info_of_mft_t* file_info,
+	const void* mft_buffer,
+	const int buffer_len)
+{
+    int ret = 0;
+    int mft_attr_count = 0;
+    libfsntfs_mft_entry_t* mft_entry_ctx = NULL;
+    libfsntfs_io_handle_t* io_handle = NULL;
+
+	if (!file_info || !mft_buffer || buffer_len < 1024)
+	{
+		goto Exit0;
+	}
+
+	memset(file_info, 0, sizeof(simple_file_info_of_mft_t));
+    ret = libfsntfs_mft_entry_initialize(&mft_entry_ctx, NULL);
+    if (1 != ret)
+    {
+        goto Exit0;
+	}
+
+    ret = libfsntfs_mft_entry_read_data(mft_entry_ctx, (uint8_t*)mft_buffer, buffer_len, 0, NULL);
+    if (1 != ret)
+    {
+        goto Exit0;
+    }
+
+    ret = libfsntfs_mft_entry_is_allocated(mft_entry_ctx, NULL);
+    if (1 != ret)
+    {
+        goto Exit0;
+	}
+
+    ret = libfsntfs_io_handle_initialize(&io_handle, NULL);
+    if (1 != ret)
+	{
+		goto Exit0;
+	}
+
+    // 解析MFT属性列表
+    io_handle->cluster_block_size = 4096;
+    ret = libfsntfs_mft_entry_read_attributes_data(mft_entry_ctx, io_handle, mft_buffer, buffer_len, NULL);
+	if (1 != ret)
+	{
+		goto Exit0;
+	}
+
+	// 获取MFT属性个数
+    ret = libfsntfs_mft_entry_get_number_of_attributes(mft_entry_ctx, &mft_attr_count, NULL);
+    if (1 != ret)
+    {
+        goto Exit0;
+    }
+
+    // 遍历MFT属性列表
+	for (int mft_attr_index = 0; mft_attr_index < mft_attr_count; mft_attr_index++)
+    {
+        libfsntfs_mft_attribute_t* mft_attr_ctx = NULL;
+        ret = libfsntfs_mft_entry_get_attribute_by_index(mft_entry_ctx, mft_attr_index, &mft_attr_ctx, NULL);
+		if (1 != ret)
+		{
+			continue;
+		}
+
+		if (mft_attr_ctx->type == LIBFSNTFS_ATTRIBUTE_TYPE_FILE_NAME) // 处理FILE_NAME(30H)属性
+        {
+			// 属性中有可能有好几个FILE_NAME，如果已经拿到文件名了，就不再处理后面的了
+            if (file_info->file_name[0] == L'\0')
+            {
+                libfsntfs_attribute_t* attr_ctx = NULL;
+                if (1 == libfsntfs_attribute_initialize(&attr_ctx, mft_attr_ctx, NULL))
+                {
+                    if (1 == libfsntfs_internal_attribute_read_value((libfsntfs_internal_attribute_t*)attr_ctx, io_handle, NULL, 0, NULL))
+                    {
+                        // 文件名
+                        libfsntfs_file_name_attribute_get_utf16_name(attr_ctx, file_info->file_name, MAX_PATH - 1, NULL);
+                        // 创建时间
+                        libfsntfs_file_name_attribute_get_creation_time(attr_ctx, &file_info->creation_time, NULL);
+                        // 修改时间
+                        libfsntfs_file_name_attribute_get_modification_time(attr_ctx, &file_info->modification_time, NULL);
+                        // 访问时间
+                        libfsntfs_file_name_attribute_get_access_time(attr_ctx, &file_info->access_time, NULL);
+                    }
+                    libfsntfs_attribute_free(&attr_ctx, NULL);
+                }
+            }
+		}
+		else if (mft_attr_ctx->type == LIBFSNTFS_ATTRIBUTE_TYPE_DATA) // 处理DATA(80H)属性
+        {
+			if (0 == file_info->data_run_count)
+			{
+				// non_resident 官方解释
+				// 对于属性来说，可分为常驻属性和非常驻属性。
+				// 常驻属性的含义是该属性的全部内容都位于MFT记录中，而非常驻属性的含意为该属性的内容位于硬盘的其他区域，在MFT中仅留一指针。
+				// 我的理解：小文件，文件内容直接包含在了MFT结构体中。大文件，使用data_run列表，记录了各个文件块的位置
+				if (1 != libfsntfs_mft_attribute_data_is_resident(mft_attr_ctx, NULL))
+				{
+					libfsntfs_data_run_t* data_run_ctx = NULL;
+					int data_run_count = 0;
+					if (1 == libfsntfs_mft_attribute_get_number_of_data_runs(mft_attr_ctx, &data_run_count, NULL))
+					{
+						for (int run_list_index = 0; run_list_index < data_run_count; run_list_index++)
+						{
+							if (1 == libfsntfs_mft_attribute_get_data_run_by_index(mft_attr_ctx, run_list_index, &data_run_ctx, NULL))
+							{
+								simple_file_data_run_of_mft_t* temp_run = &file_info->data_run[file_info->data_run_count++];
+								temp_run->offset = data_run_ctx->start_offset;
+								temp_run->size = data_run_ctx->size;
+								file_info->file_size += data_run_ctx->size;
+							}
+						}
+					}
+				}
+				else
+				{
+					// TODO(yaoyuliang)：小文件的内容，直接包含在了MFT记录结构体内，暂时不太好获取其相对于整个磁盘的偏移量，暂不处理
+				}
+			}
+		}
+	}
+
+	ret = 0;
+
+Exit0:
+	if (io_handle)
+	{
+		libfsntfs_io_handle_free(&io_handle, NULL);
+	}
+
+	if (mft_entry_ctx)
+	{
+		libfsntfs_mft_entry_free(&mft_entry_ctx, NULL);
+	}
+
+	if (file_info)
+	{
+		if (file_info->file_name[0] != L'\0' &&
+			file_info->data_run_count > 0)
+		{
+			ret = 1;
+		}
+	}
+
+	return ret;
+}
 
 /* Creates a MFT metadata file
  * Make sure the value mft_metadata_file is referencing, is set to NULL

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="VSDebug|Win32">
+      <Configuration>VSDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7EC7E241-8C9E-40DC-8BF5-78FC90CEA990}</ProjectGuid>
+    <RootNamespace>pyfsntfs</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VSDebug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='VSDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>16.0.33423.256</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VSDebug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\include;..\..\common;..\..\libcerror;..\..\libcdata;..\..\libclocale;..\..\libcsplit;..\..\libuna;..\..\libcfile;..\..\libcpath;..\..\libbfio;..\..\libfguid;C:\Python27\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;HAVE_LOCAL_LIBCERROR;HAVE_LOCAL_LIBCDATA;HAVE_LOCAL_LIBCLOCALE;HAVE_LOCAL_LIBCSPLIT;HAVE_LOCAL_LIBUNA;HAVE_LOCAL_LIBCFILE;HAVE_LOCAL_LIBCPATH;HAVE_LOCAL_LIBBFIO;HAVE_LOCAL_LIBFGUID;LIBFSNTFS_DLL_IMPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).pyd</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);C:\Python27\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>$(OutDir)$(ProjectName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='VSDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\include;..\..\common;..\..\libcerror;..\..\libcdata;..\..\libclocale;..\..\libcsplit;..\..\libuna;..\..\libcfile;..\..\libcpath;..\..\libbfio;..\..\libfguid;C:\Python27\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;HAVE_LOCAL_LIBCERROR;HAVE_LOCAL_LIBCDATA;HAVE_LOCAL_LIBCLOCALE;HAVE_LOCAL_LIBCSPLIT;HAVE_LOCAL_LIBUNA;HAVE_LOCAL_LIBCFILE;HAVE_LOCAL_LIBCPATH;HAVE_LOCAL_LIBBFIO;HAVE_LOCAL_LIBFGUID;LIBFSNTFS_DLL_IMPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <SmallerTypeCheck>true</SmallerTypeCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).pyd</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);C:\Python27\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImportLibrary>$(OutDir)$(ProjectName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_attribute.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_attributes.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_attribute_types.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_data_stream.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_data_streams.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_datetime.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_error.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_file_attribute_flags.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_file_entries.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_file_entry.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_file_name_attribute.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_file_object_io_handle.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_guid.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_integer.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_mft_metadata_file.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_mft_metadata_file_entries.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_object_identifier_attribute.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_reparse_point_attribute.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_security_descriptor_attribute.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_standard_information_attribute.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_usn_change_journal.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_volume.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_volume_file_entries.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_volume_information_attribute.c" />
+    <ClCompile Include="..\..\pyfsntfs\pyfsntfs_volume_name_attribute.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_attribute.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_attributes.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_attribute_types.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_data_stream.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_data_streams.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_datetime.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_error.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_file_attribute_flags.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_file_entries.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_file_entry.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_file_name_attribute.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_file_object_io_handle.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_guid.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_integer.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_libbfio.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_libcerror.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_libclocale.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_libfguid.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_libfsntfs.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_mft_metadata_file.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_mft_metadata_file_entries.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_object_identifier_attribute.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_python.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_reparse_point_attribute.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_security_descriptor_attribute.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_standard_information_attribute.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_unused.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_usn_change_journal.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_volume.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_volume_file_entries.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_volume_information_attribute.h" />
+    <ClInclude Include="..\..\pyfsntfs\pyfsntfs_volume_name_attribute.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\libbfio\libbfio.vcxproj">
+      <Project>{b3caa0da-b778-4b69-8537-3af7f9984f51}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcdata\libcdata.vcxproj">
+      <Project>{f42c141b-becb-4f9c-828b-8ba0db2bf7e5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcerror\libcerror.vcxproj">
+      <Project>{4c79d798-fb54-4cd5-9067-9bdc8678478a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcfile\libcfile.vcxproj">
+      <Project>{9dede9e5-79d9-41bf-b0e7-92f61d394be2}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libclocale\libclocale.vcxproj">
+      <Project>{f0dfa3bb-b24d-4b3c-b3c2-9fb961d96395}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcpath\libcpath.vcxproj">
+      <Project>{5c1834b6-0ba9-4541-8770-d65a78f33958}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libcsplit\libcsplit.vcxproj">
+      <Project>{9d9a7fb3-b049-4e4c-835a-d2516dc2f076}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libfguid\libfguid.vcxproj">
+      <Project>{ad1e9bc6-39ca-4913-8c16-15ad16f1ba78}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libfsntfs\libfsntfs.vcxproj">
+      <Project>{d1ca56f0-00c0-4e8c-bd6f-8a15619a954d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\libuna\libuna.vcxproj">
+      <Project>{8447ca5b-9d12-4df0-b225-a25f4b288d2d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
