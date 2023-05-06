@@ -18,6 +18,9 @@ typedef struct simple_file_info_of_mft_tag
     unsigned long long creation_time;
     unsigned long long modification_time;
     unsigned long long access_time;
+    unsigned long long mft_record_number;
+    unsigned long long parent_mft_record_number;
+    unsigned long meta_seq;
     int data_run_count;
     simple_file_data_run_of_mft_t data_run[MAX_PATH];
 } simple_file_info_of_mft_t;

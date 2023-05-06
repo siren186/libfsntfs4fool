@@ -43,6 +43,8 @@
 #include "libfsntfs.h"
 #include "libfsntfs_simple.h"
 
+#include "fsntfs_mft_entry.h"
+
 // 文件名、文件大小、创建时间、修改时间、访问时间、文件块列表
 int libfsntfs_simple_parse_mft_entry(
 	simple_file_info_of_mft_t* file_info,
@@ -99,6 +101,10 @@ int libfsntfs_simple_parse_mft_entry(
         goto Exit0;
     }
 
+    fsntfs_mft_entry_header_t* mft_entry_header = (fsntfs_mft_entry_header_t*)mft_buffer;
+    file_info->mft_record_number = *(uint32_t*)mft_entry_header->index;
+    file_info->meta_seq = *(uint16_t*)mft_entry_header->sequence;
+
     // 遍历MFT属性列表
 	for (int mft_attr_index = 0; mft_attr_index < mft_attr_count; mft_attr_index++)
     {
@@ -127,6 +133,8 @@ int libfsntfs_simple_parse_mft_entry(
                         libfsntfs_file_name_attribute_get_modification_time(attr_ctx, &file_info->modification_time, NULL);
                         // 访问时间
                         libfsntfs_file_name_attribute_get_access_time(attr_ctx, &file_info->access_time, NULL);
+                        // 父文件夹MFT记录号
+                        libfsntfs_file_name_attribute_get_parent_file_reference(attr_ctx, &file_info->parent_mft_record_number, NULL);
                     }
                     libfsntfs_attribute_free(&attr_ctx, NULL);
                 }
